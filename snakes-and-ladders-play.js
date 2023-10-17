@@ -28,13 +28,14 @@ function takeTurn(playerIndex) {
 function calculateAndSetNewPosition(diceResult, playerIndex) {
   let newPosition = calculateNewPosition(playerIndex, diceResult, names);
   while (diceResult === 6 && newPosition <= 150) {
+    
+    diceResult = rollDice();
     console.log(
       `${names[playerIndex]} gets another chance, next roll: ${diceResult}`
     );
-    diceResult = rollDice();
     newPosition = calculateNewPosition(playerIndex, diceResult, names);
-
-    console.log(`${names[playerIndex]} rolled a ${diceResult}`);
+    playerPosition[playerIndex] = newPosition;
+  
   }
 
   playerPosition[playerIndex] = newPosition;
