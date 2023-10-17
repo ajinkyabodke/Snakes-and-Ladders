@@ -15,7 +15,7 @@ const snakesAndLadders = {
   96: -54,
 };
 
-let playerPosition = [0, 0, 0, 0];
+const playerPosition = [0, 0, 0, 0];
 
 function applySnakesAndLadders(position, playerIndex, names) {
   const movement = snakesAndLadders[position];
@@ -45,10 +45,13 @@ function calculateNewPosition(playerIndex, result, names) {
     playerPosition[playerIndex] += result;
   }
 
+  playerPosition[playerIndex] = applySnakesAndLadders(
+    playerPosition[playerIndex],
+    playerIndex,
+    names
+  );
 
-  playerPosition[playerIndex] = applySnakesAndLadders(playerPosition[playerIndex] , playerIndex, names);
-    
-  return playerPosition[playerIndex] ;
+  return playerPosition[playerIndex];
 }
 
 module.exports = {

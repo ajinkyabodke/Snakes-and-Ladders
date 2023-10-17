@@ -4,9 +4,9 @@ const {
   snakesAndLaddersBoard,
 } = require("./snakes-and-ladders.js");
 
-let players = 4;
+const players = 4;
 const names = ["P1", "P2", "P3", "P4"];
-let playerPosition = [0, 0, 0, 0];
+const playerPosition = [0, 0, 0, 0];
 
 function rollDice() {
   return Math.floor(Math.random() * 6) + 1;
@@ -21,25 +21,24 @@ function printBoard() {
 }
 
 function takeTurn(playerIndex) {
-  let result = rollDice();
+  const result = rollDice();
   console.log(`${names[playerIndex]} rolled a ${result}`);
-
-  let newPosition = calculateNewPosition(playerIndex, result, names);
-
-  while (result === 6 && newPosition <= 100) {
+  return calculateAndSetNewPosition(result, playerIndex);
+}
+function calculateAndSetNewPosition(diceResult, playerIndex) {
+  let newPosition = calculateNewPosition(playerIndex, diceResult, names);
+  while (diceResult === 6 && newPosition <= 150) {
     console.log(
-      `${names[playerIndex]} gets another chance, next roll: ${result}`
+      `${names[playerIndex]} gets another chance, next roll: ${diceResult}`
     );
-    result = rollDice();
-    newPosition = calculateNewPosition(playerIndex, result, names);
-    
-    console.log(`${names[playerIndex]} rolled a ${result}`);
-    
+    diceResult = rollDice();
+    newPosition = calculateNewPosition(playerIndex, diceResult, names);
+
+    console.log(`${names[playerIndex]} rolled a ${diceResult}`);
   }
 
   playerPosition[playerIndex] = newPosition;
 }
-
 
 function game() {
   let gameStatus = -1;
