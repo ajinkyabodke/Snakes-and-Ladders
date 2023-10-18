@@ -1,7 +1,5 @@
-const board = require("./board.js");
-const { snakesAndLaddersBoard } = board;
-
 const snakesAndLadders = {
+  //postive values are ladders and negative are snakes(making implementation easy)
   4: 52,
   12: 38,
   14: 41,
@@ -21,6 +19,7 @@ function applySnakesAndLadders(position, playerIndex, names) {
   const movement = snakesAndLadders[position];
 
   if (movement !== undefined) {
+    //to check if a snake or a ladder exists
     if (movement > 0) {
       console.log(
         `${names[playerIndex]} climbed up a ladder from ${position} to ${
@@ -34,17 +33,18 @@ function applySnakesAndLadders(position, playerIndex, names) {
         }`
       );
     }
-    return position + movement;
+    return position + movement; //returning the calculated position
   }
-
-  return position;
+  return position; //returning the position as it is if snake or ladder not encountered
 }
 
 function calculateNewPosition(playerIndex, result, names) {
+  // Update player position if within the board size
   if (playerPosition[playerIndex] + result <= 100) {
     playerPosition[playerIndex] += result;
   }
 
+  // Calculate postion in case of snakes and ladders
   playerPosition[playerIndex] = applySnakesAndLadders(
     playerPosition[playerIndex],
     playerIndex,
@@ -57,6 +57,5 @@ function calculateNewPosition(playerIndex, result, names) {
 module.exports = {
   applySnakesAndLadders,
   calculateNewPosition,
-  snakesAndLaddersBoard,
   playerPosition,
 };
